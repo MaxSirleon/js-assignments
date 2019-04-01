@@ -100,7 +100,12 @@ function getFirstChar(value) {
  */
 function removeLeadingAndTrailingWhitespaces(value) {
     if(value[0] == " "){
-        return value.slice(2,(value.length-1));
+        return value.slice(2,(value.length));
+    }
+    if(value[0] == "\"){
+       return value.slice(2,(value.length));
+    }else{
+        return value;
     }
 }
 
