@@ -104,6 +104,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
     }
     if(value[1] == "t"){
        return value.slice(2,(value.length));
+    }
     return value;
 }
 
