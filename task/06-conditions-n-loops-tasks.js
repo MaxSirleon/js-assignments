@@ -157,7 +157,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+     return Math.hypot(point.x - circle.center.x, point.y - circle.center.y) < circle.radius;
 }
 
 
@@ -173,7 +173,9 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+     for (let i = 0; i < str.length; i++) {
+        if (str.indexOf(str.charAt(i), str.indexOf(str.charAt(i)) + 1) < 0) return str.charAt(i);
+    }
 }
 
 
@@ -199,7 +201,11 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    var arr = [a, b];
+    arr.sort((a, b) => a - b);
+    var StartIncluded = isStartIncluded ? '[' : '(';
+    var EndIncluded = isEndIncluded ? ']' : ')';
+    return `${ StartIncluded }${ arr[0] }, ${ arr[1] }${ EndIncluded }`;
 }
 
 
@@ -216,8 +222,11 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
-}
+   var result = [];
+    for (var i = str.length - 1; i >= 0; i--) {
+        result += str[i];
+    }
+    return result;
 
 
 /**
