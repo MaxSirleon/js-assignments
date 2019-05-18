@@ -227,6 +227,7 @@ function reverseString(str) {
         result += str[i];
     }
     return result;
+}
 
 
 /**
