@@ -209,7 +209,10 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+  var str1 = '─'.repeat(width - 2);
+  var str2 = ' '.repeat(width - 2);
+  var str3 = `\n│${ str2 }│`.repeat(height - 2);
+  return `┌${ str1 }┐${ str3 }\n└${ str1 }┘\n`;
 }
 
 
@@ -229,7 +232,13 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+  const charsInAlfovit = 26;
+  const rotation = 13;
+  const Z = 'Z'.charCodeAt(0);
+  const z = 'z'.charCodeAt(0);
+  return str.replace(/[a-zA-Z]/g, function (str) {
+    return String.fromCharCode((str <= "Z" ? Z : z) >= (str = str.charCodeAt(0) + rotation) ? str : str - charsInAlfovit);
+  });
 }
 
 /**
@@ -246,7 +255,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    return typeof value === 'string' || value instanceof String;
 }
 
 
@@ -275,7 +284,7 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+   return '♣♦♥♠'.indexOf(value.slice(-1)) * 13 + 'A234567891JQK'.indexOf(value.slice(0, 1));
 }
 
 
