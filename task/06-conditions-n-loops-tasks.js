@@ -243,7 +243,12 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    var str = num.toString();
+    var result = [];
+    for (var i = str.length - 1; i >= 0; i--) {
+        result += str[i];
+    }
+    return result;
 }
 
 
@@ -287,7 +292,13 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+   if (num < 9) return num;
+    var sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num = parseInt(num / 10);
+    }
+    return getDigitalRoot(sum);   
 }
 
 
@@ -313,7 +324,16 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    var brackets = "[]{}()<>";
+    var stack = [];
+    var char, position;
+    for (var i = 0; char = str[i]; i++) {
+        position = brackets.indexOf(char);
+
+        if (position % 2 === 0) stack.push(position + 1);else if (stack.length === 0 || stack.pop() !== position) return false;
+    }
+
+    return stack.length === 0;
 }
 
 
@@ -373,7 +393,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.toString(n);
 }
 
 
