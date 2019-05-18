@@ -17,8 +17,41 @@
  *  ]
  */
 function createCompassPoints() {
-    throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
+    var sides = ['N', 'E', 'S', 'W']; // use array of cardinal directions only!
+
+    let result = [];
+    var dev1,
+        dev,
+        azim = 360,
+        az,
+        deg,
+        count;
+
+    for (var i = 0; i < 32; i++) {
+
+        az = i * azim / 32;
+        deg = az;
+
+        count = 0;
+        while (deg >= 90) {
+            deg = deg - 90;
+            count++;
+        }
+
+        if (count > 2) dev = sides[0];else dev = sides[count + 1];
+
+        if (sides[count] === sides[0] || sides[count] === sides[2]) dev1 = sides[count] + dev;else dev1 = dev + sides[count];
+
+        if (deg === 0) result.push({ abbreviation: sides[count], azimuth: az });
+        if (deg === 11.25) result.push({ abbreviation: sides[count] + 'b' + dev, azimuth: az });
+        if (deg === 22.5) result.push({ abbreviation: sides[count] + dev1, azimuth: az });
+        if (deg === 33.75) result.push({ abbreviation: dev1 + 'b' + sides[count], azimuth: az });
+        if (deg === 45) result.push({ abbreviation: dev1, azimuth: az });
+        if (deg === 56.25) result.push({ abbreviation: dev1 + 'b' + dev, azimuth: az });
+        if (deg === 67.5) result.push({ abbreviation: dev + dev1, azimuth: az });
+        if (deg === 78.75) result.push({ abbreviation: dev + 'b' + sides[count], azimuth: az });
+    }
+    return result;
 }
 
 
@@ -88,7 +121,28 @@ function* expandBraces(str) {
  *
  */
 function getZigZagMatrix(n) {
-    throw new Error('Not implemented');
+    var arr = Array.from({ length: n }, (element, index) => {
+        element = new Array(n).fill(0);
+        element[index] = 0;
+        return element;
+    });
+    function overallCode(v1, v2) {
+        if (v1 < n) v1++;else v2 += 2;
+        if (v2 > 1) v2--;
+    }
+    var i = 1,
+        j = 1;
+    for (var k = 0; k < n * n; k++) {
+        arr[i - 1][j - 1] = k;
+        if ((i + j) % 2 == 0) {
+            if (j < n) j++;else i += 2;
+            if (i > 1) i--;
+        } else {
+            if (i < n) i++;else j += 2;
+            if (j > 1) j--;
+        }
+    }
+    return arr;
 }
 
 
